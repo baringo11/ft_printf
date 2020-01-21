@@ -6,7 +6,7 @@
 /*   By: jbaringo <jbaringo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 08:54:23 by jbaringo          #+#    #+#             */
-/*   Updated: 2020/01/17 12:55:27 by jbaringo         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:31:11 by jbaringo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@
 
 int		main(void)
 {
-/* 	int a;
-	void *pt = &a;
+ 	int a;
+/*	void *pt = &a;
 	
 	ft_printf("%02.9p\n", 1234564545);
 	a = printf("%2.9p\n", 1234564545); */
 	
-	ft_printf("hola \n \" \n");
-	printf("hola \\ \" \n");
+	ft_printf("%#-8.5x\n", 34);
+	a = printf("%#-8.5x\n", 34);
+	printf("a: %d\n", a);
 }

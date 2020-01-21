@@ -6,7 +6,7 @@
 /*   By: jbaringo <jbaringo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:21:16 by jbaringo          #+#    #+#             */
-/*   Updated: 2020/01/16 13:16:59 by jbaringo         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:07:43 by jbaringo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_variables		*set_init(char *s)
 	var->digit = 0;
 	var->width = 0;
 	var->ptr = 0;
+	var->espacio = 0;
+	var->hastag = 0;
 	return (var);
 }
 
@@ -46,4 +48,6 @@ void			set_to_cero(t_variables **var)
 	(*var)->digit = 0;
 	(*var)->width = 0;
 	(*var)->ptr = 0;
+	(*var)->espacio = 0;
+	(*var)->hastag = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: jbaringo <jbaringo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 14:34:23 by jbaringo          #+#    #+#             */
-/*   Updated: 2020/01/16 13:49:23 by jbaringo         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:08:39 by jbaringo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_flag(const char *s, t_variables **var)
 {
 	if (s[(*var)->i] == '0' || s[(*var)->i] == '-' ||
 			s[(*var)->i] == '+' || ft_isdigit(s[(*var)->i]) ||
-									s[(*var)->i] == '*')
+	s[(*var)->i] == '*' || s[(*var)->i] == ' ' || s[(*var)->i] == '#')
 		check_length(s, var);
 	if (s[(*var)->i] == '.')
 		check_precision(s, var);

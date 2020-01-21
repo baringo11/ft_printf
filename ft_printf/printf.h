@@ -6,7 +6,7 @@
 /*   By: jbaringo <jbaringo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:19:02 by jbaringo          #+#    #+#             */
-/*   Updated: 2020/01/16 17:00:01 by jbaringo         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:02:04 by jbaringo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct		s_printf
 	int				p;
 	int				digit;
 	int				ptr;
+	int				espacio;
+		int				hastag;
 }					t_variables;
 
 int					ft_printf(const char *s, ...);
@@ -63,7 +65,7 @@ void				ifpercent(t_variables **var);
 void				ifpointer(t_ptr n, t_variables **var);
 void				ifhexadecimal_ptr(unsigned long n, t_variables **var);
 void				ft_putchar_fd(char c, int fd);
-void				ft_putnbr_fd(int n, int fd);
+void				ft_putnbr_fd(int n, int fd, t_variables **var);
 void				ft_putstr_fd(char *s, int fd);
 int					ft_isdigit(int c);
 char				*ft_strchr(const char *s, int c);

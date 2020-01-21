@@ -6,7 +6,7 @@
 /*   By: jbaringo <jbaringo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 11:55:54 by jbaringo          #+#    #+#             */
-/*   Updated: 2020/01/16 13:27:50 by jbaringo         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:31:58 by jbaringo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ void	cont_hex(unsigned int n, t_variables **var)
 
 void	print_hex(unsigned int n, t_variables **var)
 {
+	if ((*var)->hastag == 1 && n != 0)
+	{
+		if ((*var)->str[(*var)->i] == 'X')
+			ft_putstr_fd("0X", 1);
+		else
+			ft_putstr_fd("0x", 1);
+		(*var)->hastag = 0;
+	}
 	if (n >= 16)
 		print_hex(n / 16, var);
 	if ((*var)->str[(*var)->i] == 'X')
@@ -49,6 +57,14 @@ void	print_hex(unsigned int n, t_variables **var)
 
 void	ft_menos_hex(int n, t_variables **var)
 {
+	if ((*var)->hastag == 1 && n != 0 && ((*var)->p == 1 || (*var)->cero == 1))
+	{
+		if ((*var)->str[(*var)->i] == 'X')
+			ft_putstr_fd("0X", 1);
+		else
+			ft_putstr_fd("0x", 1);
+		(*var)->hastag = 0;
+	}
 	while (((*var)->precision - (*var)->cont) > 0)
 	{
 		ft_putchar_fd('0', 1);
@@ -64,12 +80,22 @@ void	ft_menos_hex(int n, t_variables **var)
 
 void	ft_digit_cero_hex(int n, t_variables **var)
 {
-	while ((*var)->width > 0)
+	while ((*var)->width > 0 && (*var)->cero != 1)
 	{
-		if ((*var)->cero == 1)
-			ft_putchar_fd('0', 1);
+		ft_putchar_fd(' ', 1);
+		(*var)->width--;
+	}
+	if ((*var)->hastag == 1 && n != 0 && ((*var)->p == 1 || (*var)->cero == 1))
+	{
+		if ((*var)->str[(*var)->i] == 'X')
+			ft_putstr_fd("0X", 1);
 		else
-			ft_putchar_fd(' ', 1);
+			ft_putstr_fd("0x", 1);
+		(*var)->hastag = 0;
+	}
+	while ((*var)->width > 0 && (*var)->cero == 1)
+	{
+		ft_putchar_fd('0', 1);
 		(*var)->width--;
 	}
 	while (((*var)->precision - (*var)->cont) > 0)
@@ -82,6 +108,11 @@ void	ft_digit_cero_hex(int n, t_variables **var)
 
 void	ifhexadecimal(int n, t_variables **var)
 {
+	if ((*var)->hastag == 1 && n != 0)
+	{
+		(*var)->length -= 2;
+		(*var)->j += 2;
+	}
 	cont_hex(n, var);
 	if (!(n == 0 && (*var)->p == 1 && (*var)->precision == 0))
 	{

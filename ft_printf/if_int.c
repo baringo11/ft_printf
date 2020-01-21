@@ -6,7 +6,7 @@
 /*   By: jbaringo <jbaringo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:05:58 by jbaringo          #+#    #+#             */
-/*   Updated: 2020/01/17 09:32:18 by jbaringo         ###   ########.fr       */
+/*   Updated: 2020/01/21 14:54:32 by jbaringo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ void			ft_cero(int n, t_variables **var)
 		(*var)->width--;
 		ft_putchar_fd('+', 1);
 	}
+	else if ((*var)->espacio == 1)
+		ft_putchar_fd(' ', 1);
 	while ((*var)->width > 0)
 	{
 		ft_putchar_fd('0', 1);
 		(*var)->width--;
 	}
-	ft_putnbr_fd(n, 1);
+	ft_putnbr_fd(n, 1, var);
 }
 
 void			ft_digit(int n, t_variables **var)
@@ -65,15 +67,18 @@ void			ft_digit(int n, t_variables **var)
 	{
 		ft_putchar_fd('-', 1);
 		n = n * -1;
+		(*var)->espacio = 0;
 	}
 	else if ((*var)->mas == 1)
 		ft_putchar_fd('+', 1);
+	if (((*var)->espacio == 1 && (*var)->mas == 0) && (*var)->espacio--)
+		ft_putchar_fd(' ', 1);
 	while (((*var)->precision - get_num_size(n)) > 0)
 	{
 		ft_putchar_fd('0', 1);
 		(*var)->precision--;
 	}
-	ft_putnbr_fd(n, 1);
+	ft_putnbr_fd(n, 1, var);
 }
 
 void			cont_int(int n, t_variables **var)
@@ -94,7 +99,7 @@ void			cont_int(int n, t_variables **var)
 	else if ((*var)->p == 1 && (*var)->precision > num_size)
 	{
 		(*var)->j += (*var)->precision;
-		if (n < 0)
+		if (n < 0 || ((*var)->mas == 1 && n >= 0))
 			(*var)->j++;
 	}
 	else
@@ -103,6 +108,12 @@ void			cont_int(int n, t_variables **var)
 
 void			ifint(int n, t_variables **var)
 {
+	if ((*var)->espacio == 1 && (*var)->mas == 0 &&
+		(*var)->menos == 0 && n >= 0)
+	{
+		(*var)->length--;
+		(*var)->j++;
+	}
 	cont_int(n, var);
 	if (!(n == 0 && (*var)->p == 1 && (*var)->precision == 0))
 	{
@@ -113,7 +124,7 @@ void			ifint(int n, t_variables **var)
 		else if ((*var)->digit == 1 || (*var)->mas == 1 || (*var)->p == 1)
 			ft_digit(n, var);
 		else
-			ft_putnbr_fd(n, 1);
+			ft_putnbr_fd(n, 1, var);
 	}
 	else
 		ft_precision_cero(var);
